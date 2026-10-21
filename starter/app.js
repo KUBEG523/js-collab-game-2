@@ -1,12 +1,28 @@
-// WSPOLNY KONTRAKT: nazwy zmiennych i funkcji uzgadnia caly zespol.
-const MAKS_ENERGIA = 10;
-let pokoj = 1;
-let energia = MAKS_ENERGIA;
-let karta = false;
-let bezpiecznik = false;
-let zasilanie = false;
-let koniec = false;
-let wygrana = false;
+// obiekt gracza
+let gracz =
+{
+  pokoj: 1,
+  energia: 15,
+  posiadakarte: false,
+  stanzasilania: false,
+  koniecgry: false,
+  wygrana: false
+}
+
+//obiekt pokoju
+
+const pokoje = [
+  { id: 1, nazwa: "Wejście", oswietlony: true, karta: false, bezpiecznik: false },
+  { id: 2, nazwa: "Ochrona", oswietlony: false, karta: false, bezpiecznik: false, Dodatkowaenergia: false},
+  { id: 3, nazwa: "Korytarz", oswietlony: true, karta: false, bezpiecznik: false },
+  { id: 4, nazwa: "Serwerownia", oswietlony: true, karta: false, bezpiecznik: false },
+  { id: 5, nazwa: "Magazyn", oswietlony: true, karta: false, bezpiecznik: true },
+  { id: 6, nazwa: "Sekretariat", oswietlony: false, karta: true, bezpiecznik: false },
+  { id: 7, nazwa: "Wyjście", oswietlony: true, karta: false, bezpiecznik: false }
+];
+
+
+
 
 // SEKCJA 0 — GOTOWY SILNIK NAUCZYCIELA
 function start() {
