@@ -10,7 +10,6 @@ let gracz =
 }
 
 //obiekt pokoju
-
 const pokoje = [
   { id: 1, nazwa: "Wejście", oswietlony: true, karta: false, bezpiecznik: false },
   { id: 2, nazwa: "Ochrona", oswietlony: false, karta: false, bezpiecznik: false, Dodatkowaenergia: false},
@@ -21,32 +20,58 @@ const pokoje = [
   { id: 7, nazwa: "Wyjście", oswietlony: true, karta: false, bezpiecznik: false }
 ];
 
-
-
-
 // SEKCJA 0 — GOTOWY SILNIK NAUCZYCIELA
 function start() {
-  pokoj = 1;
-  energia = MAKS_ENERGIA;
-  karta = false;
-  bezpiecznik = false;
-  zasilanie = false;
-  koniec = false;
-  wygrana = false;
-  console.log("UCIECZKA Z SERWEROWNI. Zasilanie awaryjne wystarczy na 10 tur.");
-  pomoc();
-  rozejrzyj();
+gracz.pokoj = 1;
+gracz.energia = 15
+gracz.posiadakarte = false;
+gracz.stanzasilania = false;
+gracz.koniecgry = false;
+gracz.wygrana = false;
+
+console.log("Ucieczka z Serwerowni v2, Energi starczy ci na " + gracz.energia + "pokoji. Ale może gdzieś jest jej wiecej?");
+pomoc();
 }
 
-function zakonczTure() {
-  energia = energia - 1;
-  console.log("Pozostala energia: " + energia);
-  if (wygrana) {
-    console.log("WYGRANA! Drzwi otwarte. Mozesz wrocic do domu.");
-  } else if (energia === 0) {
-    koniec = true;
-    console.log("PRZEGRANA. Zasilanie awaryjne padlo. Wpisz start().");
+// Sprawdza stan energi gracza
+function poziomenergii()
+{
+  if(gracz.energia == 0)
+  {
+  gracz.wygrana = false;
+  gracz.koniecgry = true;
+  console.log("Przegrana, Skończyła ci się energia i to już koniec, zacznij gre od nowa komędą start() ");
   }
+}
+
+// Otwierania drzwi wejściowych
+function Otworzdrzwi() {
+  if(gracz.koniecgry == true)
+  {
+    console.log("Gra skończona, nie możesz wchodzić w interakcje z grą, zacznij nową.")
+    return;
+  }
+
+if("Wyjście" === pokoje.find(pokoj => pokoj.nazwa === "Wyjście");)
+{
+  if(gracz.posiadakarte == true && gracz.stanzasilania == true)
+  {
+    console.log("Otworzyłeś drzwii, to już koniec twojej przygody");
+    gracz.koniecgry == true;
+    gracz.wygrana == true;
+  }
+  else
+  {
+    console.log("Czegoś ci brakuje do otworzenia tych drzwii, jesteś pewien ze wszystko masz?");
+    return;
+  }
+}
+else
+{
+  console.log("Co próbujesz otworzyć??, nie jesteś przy wyjściu");
+  return;
+}
+  
 }
 
 // SEKCJA A — INFORMACJE I MAPA
