@@ -106,83 +106,25 @@ function mapa() {
 }
 function rozejrzyj() {
 
-  
-  switch(pokoj)
-  {
-    case 1:
-      console.log("Rozgladasz sie po lekko zakurzonym pomieszczeniu, nie jest ono brudne ale widać że ktoś dawno nie odkurzał")
-      if(!karta)
-      {
-        console.log("Na zakurzonym biurku leży karta dostępu, ciekawe co ona otwiera");
-      }
-      else
-      {
-        console.log("Już wziełeś tę karte, chyba pamiętasz?");
-      }
-      break;
+  const aktualny_Pokoj = pokoje.find(p => p.id === gracz.pokoj);
 
-    case 2:
-      console.log("Rozglądasz sie po magazynie, Widzisz dużo półek, regałów i lużno porozrzucanych rzeczy, oraz kable rj-45")
-      if(!bezpiecznik && !zasilanie)
-      {
-        console.log("Dostrzegasz lużno leżący bezpiecznik, może on być pomocy do przywrócenia zasilania");
-      }
-      else if(bezpiecznik && !zasilanie)
-      {
-        console.log("Już wziełeś ten bezpiecznik, przydało by się włączyć zasilanie");
-      }
-      else if(zasilanie)
-      {
-        console.log("W tym magazynie chyba nie ma już nic ciekawego, po co tu wogóle wszedłem?");
-      }
-      break;
-
-    case 3:
-      console.log("Rozglądasz sie po serwerownu, Skąd szkoła miała tyle pieniędzy na tyle serwerów, są tu rzędy serwerów a na końcu pomieszczenia skrzynka zasilająca")
-      if(!bezpiecznik && !zasilanie)
-      {
-        console.log("Zasilanie nie działa, przydał by ci się bezpiecznik do naprawienia zasilania");
-      }
-      else if(bezpiecznik && !zasilanie)
-      {
-        console.log("Zasilanie nie działa, na szczęście masz już bezpiecznik, nic tylko go wstadzić i włączyć zasilanie");
-      }
-      else if(zasilanie)
-      {
-        console.log("Zasilanie działa, Trzeba wyjść wkońcu z tej serwerowni");
-      }
-      break;
-
-    case 4:
-      console.log("Wyjście z serwerowni, Duze stalowe drzwi zamykane na kartę, nic ich siłą nie ruszy");
-      if(!karta && !zasilanie)
-      {
-        console.log("Nie da się otworzyć drzwi bez karty i zasilania, nic ich bez nich nie ruszy")
-      }
-      else if(karta && !zasilanie)
-      {
-        console.log("Mam kartę, ale brak zasilania, wypadało by je włączyć");
-      }
-      else if(!karta && zasilanie)
-      {
-        console.log("Zasilanie już działa, ale bez karty nie otworze tych drzwii");
-      }
-      else if(karta && zasilanie)
-      {
-        console.log("Mam już wszystko żeby, Wolność już tak blisko");
-      }
-      break;
-
-    default:
-      console.log("Nie wiem jak to zrobiłeś ale jesteś w backroomsach")
-      break;
-    }
+  if (!aktualnyPokoj) {
+    console.log("Nie znaleziono pokoju.");
+    return;
   }
 
+  console.log(`Jesteś w pomieszczeniu: ${aktualnyPokoj.nazwa}`);
 
-
-// KONIEC SEKCJI A — INFORMACJE I MAPA
-
+  
+  if(karta==true)
+{
+  console.log("Znalazłeś kartę");
+}
+  if(bazpiecznik==true)
+{
+  console.log("Znalazłeś bezpiecznik");
+}
+}
 
 // SEKCJA B — RUCH
 function idz(kierunek) {
@@ -303,5 +245,6 @@ function akcja(co) {
 
 
 }
+  
 
 start();
