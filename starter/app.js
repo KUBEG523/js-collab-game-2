@@ -197,9 +197,12 @@ function idz(kierunek) {
     else if(pokoj == 6 || pokoj == 3 || pokoj == 4)
     {
       console.log("Napotkałeś na ścianę.");
-      break;
+      energia++;
     }
-    nastepnyPokoj++;
+    else
+    {
+      nastepnyPokoj++;
+    }
   }
   else if (kierunek == "lewo")
   {
@@ -210,25 +213,52 @@ function idz(kierunek) {
     else if(pokoj == 1 || pokoj == 3 || pokoj == 4)
     {
       console.log("Napotkałeś na ścianę.");
-      break;
+      energia++;
     }
     nastepnyPokoj--;
   }
   else if(kierunek == "gora")
   {
-    if()
+    if(pokoj == 2 || pokoj == 6)
+    {
+      nastepnyPokoj++;
+    }
+    else if(pokoj == 4)
+    {
+      nastepnyPokoj-=2;
+    }
+    else
+    {
+      console.log("Napotkałeś na ścianę");
+      energia++;
+    }
   }
-  // TODO B3: odrzuc pokoj poza 1..4 i nieznany kierunek bez kosztu.
+  else if(kierunek == "dol")
+  {
+    if(pokoj == 2)
+    {
+      nastepnyPokoj += 2;
+    }
+    else if(pokoj == 3)
+    {
+      nastepnyPokoj--;
+    }
+    else
+    {
+      console.log("Napotkałeś na ścianę");
+      energia++;
+    }
+  }
+  else
+  {
+      console.log("Nieznana komenda, spróbuj jeszcze raz");
+  }
+
 
   // TODO B4: zapisz poprawny pokoj, rozejrzyj(), zakonczTure().
   pokoj = nastepnyPokoj;
+  energia--
   rozejrzyj();
-  zakonczTure();
-  default:
-    {
-      console.log("Nieznana komenda, spróbuj jeszcze raz");
-      break;
-    }
 
     poziomenergii();
   }
