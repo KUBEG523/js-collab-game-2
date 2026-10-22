@@ -187,7 +187,6 @@ function rozejrzyj() {
 // SEKCJA B — RUCH
 function idz(kierunek) {
   let nastepnyPokoj = pokoj;
-
   if(kierunek == "prawo")
   {
     if(pokoj == 2)
@@ -215,7 +214,10 @@ function idz(kierunek) {
       console.log("Napotkałeś na ścianę.");
       energia++;
     }
-    nastepnyPokoj--;
+    else
+    {
+      nastepnyPokoj--;
+    }
   }
   else if(kierunek == "gora")
   {
@@ -254,13 +256,14 @@ function idz(kierunek) {
       console.log("Nieznana komenda, spróbuj jeszcze raz");
   }
 
-
-  // TODO B4: zapisz poprawny pokoj, rozejrzyj(), zakonczTure().
+  if(nastepnyPokoj != pokoj)
+  {
+      rozejrzyj();
+  }
   pokoj = nastepnyPokoj;
   energia--
-  rozejrzyj();
+  poziomenergii();
 
-    poziomenergii();
   }
 
   
