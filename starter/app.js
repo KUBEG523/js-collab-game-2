@@ -18,16 +18,19 @@ const pokoje = [
   { id: 4, nazwa: "Serwerownia", oswietlony: true, karta: false, bezpiecznik: false },
   { id: 5, nazwa: "Magazyn", oswietlony: true, karta: false, bezpiecznik: true },
   { id: 6, nazwa: "Sekretariat", oswietlony: false, karta: true, bezpiecznik: false },
-  { id: 7, nazwa: "Wyjście", oswietlony: true, karta: false, bezpiecznik: false }
+  { id: 7, nazwa: "Wyjście", oswietlony: true, karta: false, bezpiecznik: false },
 ];
 
-
+function znajdzPokoj(id)
+{
+  return pokoje.find(pokoj => pokoje.id === id);
+}
 
 
 // SEKCJA 0 — GOTOWY SILNIK NAUCZYCIELA
 function start() {
   pokoj = 1;
-  energia = MAKS_ENERGIA;
+  energia = gracz.energia;
   karta = false;
   bezpiecznik = false;
   zasilanie = false;
@@ -55,12 +58,18 @@ function nazwaPokoju(numer) {
   switch(numer)
   {
     case 1:
-      return "Recepcja";
+      return "Wejście";
     case 2:
-      return "Magazyn";
+      return "Ochrona";
     case 3:
-      return "Serwerownia";
+      return "Korytarz";
     case 4:
+      return "Serwerownia";
+    case 5:
+      return "Magazyn";
+    case 6:
+      return "Sekretariat";
+    case 7:
       return "Wyjście";
     default:
       console.log("Nieznane pomieszczenie");
@@ -79,7 +88,7 @@ function status() {
   //wypisanie obecnego pokoju
   console.log(`Aktualny pokój to: ${pokoj}: ${nazwaPokoju(pokoj)}`);
   //wypisanie aktualnej energi
-  console.log(`Aktualny poziom energii to: ${energia} (${energia / 10 * 100}%)`);
+  console.log(`Aktualny poziom energii to: ${energia} (${energia / 15 * 100}%)`);
   //Status karty 
   console.log("Czy posiadasz kartę: " + (karta ? "tak" : "nie"));
   //Status zasilania
@@ -89,11 +98,10 @@ function status() {
   
 }
 function mapa() {
-  for(let i=1; i<=4; i++)
+  for(let i=0; i<7; i++)
   {
-    console.log(`Numer pomieszczenia: ${i}`);
-    console.log(nazwaPokoju(i))
-    console.log((i === pokoj) ? "<-- Jesteś tutaj" : "");
+    console.log(`Numer pomieszczenia: ${i+1}: ${pokoje[i].nazwa}`);
+
   }
 }
 function rozejrzyj() {
@@ -178,54 +186,54 @@ function rozejrzyj() {
 
 // SEKCJA B — RUCH
 function idz(kierunek) {
-  // TODO B1: zablokuj ruch po koncu gry.
-  if(koniec == true)
-  {
-    console.log("Gra została zakończona, napisz start(), aby rozpocząc jeszcze raz.");
-    return;
-  }
-
-  // TODO B2: switch kierunku; oblicz kandydat na nowy pokoj.
   let nastepnyPokoj = pokoj;
 
-  switch(kierunek)
+  if(kierunek == "prawo")
   {
-    case "lewo":
-      {
-        nastepnyPokoj -= 1;
-        break;
-      }
-    case "prawo":
-      {
-        nastepnyPokoj += 1;
-        break;
-      }
-    case "gora", "dol":
+    if(pokoj == 2)
     {
-      console.log("Możesz się poruszać tylko w lewo i w prawo.");
+      nastepnyPokoj += 3;
+    }
+    else if(pokoj == 6 || pokoj == 3 || pokoj == 4)
+    {
+      console.log("Napotkałeś na ścianę.");
       break;
     }
-    default:
-    {
-      console.log("Nieznana komenda, spróbuj jeszcze raz");
-      break;
-    }
+    nastepnyPokoj++;
   }
-
+  else if (kierunek == "lewo")
+  {
+    if(pokoj == 4)
+    {
+      nastepnyPokoj -= 3;
+    }
+    else if(pokoj == 1 || pokoj == 3 || pokoj == 4)
+    {
+      console.log("Napotkałeś na ścianę.");
+      break;
+    }
+    nastepnyPokoj--;
+  }
+  else if(kierunek == "gora")
+  {
+    if()
+  }
   // TODO B3: odrzuc pokoj poza 1..4 i nieznany kierunek bez kosztu.
-
-  if(nastepnyPokoj < 1 || nastepnyPokoj > 4)
-  {
-    console.log("Napotkałeś na ścianę.");
-    nastepnyPokoj = pokoj;
-    energia++;
-  }
 
   // TODO B4: zapisz poprawny pokoj, rozejrzyj(), zakonczTure().
   pokoj = nastepnyPokoj;
   rozejrzyj();
   zakonczTure();
-}
+  default:
+    {
+      console.log("Nieznana komenda, spróbuj jeszcze raz");
+      break;
+    }
+
+    poziomenergii();
+  }
+
+  
 
 // SEKCJA C — PRZEDMIOTY I WYGRANA
 function akcja(co) {
