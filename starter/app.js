@@ -122,6 +122,7 @@ function zbierz()
   //  czy przxedmiot zostal zebrany w obecnym pokoju
   let zebrano = false;
 
+  // czy pokoj ma karte
   if (pokoj.karta)
   {
     gracz.posiadakarte = true;
@@ -135,6 +136,7 @@ function zbierz()
     zebrano = true;
   }
 
+  //czy pokoj ma bezpieczik
   if (pokoj.bezpiecznik)
   {
     gracz.posiadabezpiecznik = true;
@@ -148,6 +150,7 @@ function zbierz()
     zebrano = true;
   }
 
+  // czy pokoj ma dodatkowa energie
   if (pokoj.id === 2 && pokoj.Dodatkowaenergia)
   {
     if (!pokoj.oswietlony)
@@ -172,8 +175,15 @@ function zbierz()
     console.log("W tym pokoju nie ma");
   }
 }
-
+// reset zasilania w budynku
 function przywrocZasilanie() {
+
+     if(gracz.koniecgry)
+  {
+    console.log("Gra skończona, nie możesz wchodzić w interakcje z grą, zacznij nową.")
+    return;
+  }
+  
  if(gracz.koniecgry)
   {
     console.log("Gra skończona, nie możesz wchodzić w interakcje z grą, zacznij nową.")
