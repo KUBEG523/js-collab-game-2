@@ -12,7 +12,7 @@ let gracz =
 //obiekt pokoju
 const pokoje = [
   { id: 1, nazwa: "Wejście", oswietlony: true, karta: false, bezpiecznik: false },
-  { id: 2, nazwa: "Ochrona", oswietlony: false, karta: false, bezpiecznik: false, Dodatkowaenergia: false},
+  { id: 2, nazwa: "Ochrona", oswietlony: false, karta: false, bezpiecznik: false, Dodatkowaenergia: true},
   { id: 3, nazwa: "Korytarz", oswietlony: true, karta: false, bezpiecznik: false },
   { id: 4, nazwa: "Serwerownia", oswietlony: true, karta: false, bezpiecznik: false },
   { id: 5, nazwa: "Magazyn", oswietlony: true, karta: false, bezpiecznik: true },
@@ -20,14 +20,10 @@ const pokoje = [
   { id: 7, nazwa: "Wyjście", oswietlony: true, karta: false, bezpiecznik: false },
 ];
 
-function znajdzPokoj(id)
-{
-  return pokoje.find(pokoj => pokoje.id === id);
-}
-
 
 // SEKCJA 0 — GOTOWY SILNIK NAUCZYCIELA
 function start() {
+//ustawia staty gry na domyslne wartosci
 gracz.pokoj = 1;
 gracz.energia = 15
 gracz.posiadakarte = false;
@@ -203,76 +199,11 @@ function idz(kierunek) {
     poziomenergii();
   }
 
-  
-
-// SEKCJA C — PRZEDMIOTY I WYGRANA
-function akcja(co) {
-  // TODO C1: zablokuj akcje po koncu gry.
-  if(koniec == true)
-  {
-    console.log("koniec gry wpisz start() by zagrać ponownie.");
-    return;
-  }
-  // TODO C2: switch: karta / bezpiecznik / napraw / wyjdz.
-  switch(co)
-    {
-    case "karta":
-      {
-      if (pokoj != 1 || karta) {
-        console.log("Tutaj nie ma karty do zabrania.");
-        return;
-      }
-      karta = true;
-      console.log("Zabierasz karte.");
-      break;
-      }
-
-    case "bezpiecznik":
-      {
-      if (pokoj != 2 || bezpiecznik) {
-        console.log("Tutaj nie ma bezpiecznika do zabrania.");
-        return;
-      }
-      bezpiecznik = true;
-      console.log("Zabierasz bezpiecznik.");
-      break;
-      }
-
-      case "napraw":
-      {
-      if (pokoj != 3 || bezpiecznik == false) {
-        console.log("Nie możesz naprawić zasilania.");
-        return;
-      }
-      bezpiecznik = false;
-      zasilanie = true;
-      console.log("Naprawiłeś/aś zasilanie.");
-      break;
-      }
-
-      case "wyjdz":
-      {
-
-        if (pokoj != 4 || karta != true || zasilanie != true) {
-          console.log("Nie możesz wyjść.");
-          return;
-      }
-      wygrana = true;
-      koniec = true;
-      console.log("wygrałeś/aś.");
-        break;
-      }
-      default:
-        {
-          console.log("Nie ma takiej akcji.");
-        }
-
-    }
-
-  zakonczTure();
-
-
+  // sekcja jano
+function znajdzPokoj(id)
+{
+  return pokoje.find(pokoj => pokoje.id === id);
 }
-  
+
 
 start();
