@@ -1,9 +1,9 @@
 //OBIEKTY
 
 // obiekt gracza
-let gracz = {
+var gracz = {
   pokoj: 1,
-  energia: 15,
+  energia: 20,
   posiadakarte: false,
   posiadabezpiecznik: false,
   stanzasilania: false,
@@ -30,9 +30,9 @@ const pokoje = [
   },
   {
     id: 3,
-    nazwa: "Korytarz",
+    nazwa: "Sekretariat",
     oswietlony: true,
-    karta: false,
+    karta: true,
     bezpiecznik: false,
   },
   {
@@ -51,9 +51,9 @@ const pokoje = [
   },
   {
     id: 6,
-    nazwa: "Sekretariat",
+    nazwa: "Korytarz",
     oswietlony: false,
-    karta: true,
+    karta: false,
     bezpiecznik: false,
   },
   {
@@ -66,21 +66,22 @@ const pokoje = [
 ];
 
 //OBIKETY - END
-
+console.log("skibid");
 //CORE
 
 // Funkcja start rozpoczyne gre, ustawia wartosci domyslne gry i ustawia
 function start() {
   gracz.pokoj = 1;
-  gracz.energia = 15;
+  gracz.energia = 20;
   gracz.posiadakarte = false;
   gracz.posiadabezpiecznik = false;
   gracz.stanzasilania = false;
   gracz.koniecgry = false;
   gracz.wygrana = false;
 
+  //ustawienia domyslne dla pokoji
   for (const pokoj of pokoje) {
-    pokoj.karta = pokoj.id === 6;
+    pokoj.karta = pokoj.id === 3;
     pokoj.bezpiecznik = pokoj.id === 5;
     pokoj.oswietlony = pokoj.id !== 2 && pokoj.id !== 6;
 
@@ -125,7 +126,7 @@ function Otworzdrzwi() {
   }
 
   if (gracz.pokoj === 7) {
-    if (gracz.posiadakarte == true && gracz.stanzasilania == true) {
+    if (gracz.posiadakarte && gracz.stanzasilania) {
       console.log("Otworzyłeś drzwii, to już koniec twojej przygody");
       gracz.koniecgry = true;
       gracz.wygrana = true;
@@ -146,7 +147,7 @@ function Otworzdrzwi() {
 function zbierz() {
   if (gracz.koniecgry) {
     console.log(
-      "Gra skończona, nie możesz wchodzić w interakcje z grą, zacznij nową.",
+      "Gra skończona, nie możesz wchodzić w interakcje z grą, zacznij nową",
     );
     return;
   }
@@ -155,6 +156,10 @@ function zbierz() {
   const pokoj = pokoje.find((p) => p.id === gracz.pokoj);
 
   //  czy przxedmiot zostal zebrany w obecnym pokoju
+  if (!pokoj.oswietlony) {
+    console.log("Jest zbyt ciemno aby zebrac przedmioty");
+    return;
+  }
   let zebrano = false;
 
   // czy pokoj ma karte
@@ -184,17 +189,17 @@ function zbierz() {
   // czy pokoj ma dodatkowa energie
   if (pokoj.id === 2 && pokoj.Dodatkowaenergia) {
     if (!pokoj.oswietlony) {
-      console.log("Najpierw musisz włączyć światło, żeby zebrać energię.");
+      console.log("Najpierw musisz włączyć światło, żeby zebrać energię");
       return;
     }
 
-    gracz.energia += 5;
+    gracz.energia += 10;
 
     for (const p of pokoje) {
       p.Dodatkowaenergia = false;
     }
 
-    console.log("Zebrano 5 jednostek energii. Masz teraz: " + gracz.energia);
+    console.log("Zebrano 10 jednostek energii. Masz teraz: " + gracz.energia);
     zebrano = true;
   }
 
@@ -206,14 +211,7 @@ function zbierz() {
 function przywrocZasilanie() {
   if (gracz.koniecgry) {
     console.log(
-      "Gra skończona, nie możesz wchodzić w interakcje z grą, zacznij nową.",
-    );
-    return;
-  }
-
-  if (gracz.koniecgry) {
-    console.log(
-      "Gra skończona, nie możesz wchodzić w interakcje z grą, zacznij nową.",
+      "Gra skończona, nie możesz wchodzić w interakcje z grą, zacznij nową",
     );
     return;
   }
@@ -249,6 +247,7 @@ function przywrocZasilanie() {
 
 //KOMUNIKATY
 
+// wyswietla mape gry z znacznikiem lokalizacji
 function mapa() {
   if (gracz.koniecgry) {
     console.log(
@@ -290,26 +289,48 @@ function status() {
   }
 }
 
-function rozejrzyj() {
-  const aktualny_Pokoj = pokoje.find((p) => p.id === gracz.pokoj);
+function rozejrzyj(nowyPokoj = gracz.pokoj) {
+  const aktualny_Pokoj = pokoje.find((p) => p.id === nowyPokoj);
 
-  if (!aktualnyPokoj) {
-    console.log("Nie znaleziono pokoju.");
-    return;
-  }
+  console.log(`Jesteś w pomieszczeniu: ${aktualny_Pokoj.nazwa}`);
 
-  console.log(`Jesteś w pomieszczeniu: ${aktualnyPokoj.nazwa}`);
-
-  if (karta == true) {
+  if (aktualny_Pokoj.karta) {
     console.log("Znalazłeś kartę");
   }
-  if (bazpiecznik == true) {
+
+  if (aktualny_Pokoj.bezpiecznik) {
     console.log("Znalazłeś bezpiecznik");
+  }
+
+  if (aktualny_Pokoj.Dodatkowaenergia) {
+    if (aktualny_Pokoj.oswietlony) {
+      console.log("Znalazleś pakiet energii");
+    } else {
+      console.log("znalazles cos, ale musisz oswietlic ten pokoj");
+    }
   }
 }
 
 function pomoc() {
-  // DO ZROBIENIA PRZEZ JANO
+  console.log("start() - rozpoczyna grę od nowa i resetuje wszystkie postępy.");
+  console.log(
+    'idz("kierunek") - przenosi cię do sąsiedniego pokoju. Kierunki: "lewo", "prawo", "gora", "dol". Każdy ruch kosztuje energię.',
+  );
+  console.log(
+    "zbierz() - podnosi przedmiot (kartę, bezpiecznik lub baterię) leżący w pokoju.",
+  );
+  console.log(
+    "przywrocZasilanie() - wkłada bezpiecznik i włącza prąd. Działa tylko w serwerowni.",
+  );
+  console.log(
+    "Otworzdrzwi() - otwiera drzwi wyjściowe. Potrzebujesz karty i działającego zasilania, musisz stać w pokoju Wyjście; Wszystkie warunki musza zostac spełnione (karta + zasilanie).",
+  );
+  console.log("rozejrzyj() - opisuje aktualny pokój i widoczne przedmioty.");
+  console.log("mapa() - pokazuje listę pokoi i miejsce, w którym jesteś.");
+  console.log(
+    "status() - pokazuje energię, posiadane przedmioty, stan zasilania i stan gry.",
+  );
+  console.log("UWAGA: gdy energia spadnie do 0, przegrywasz.");
 }
 
 //KOMUNIKATY -  END
@@ -319,53 +340,60 @@ function pomoc() {
 // RUCH
 
 function idz(kierunek) {
-  let nastepnyPokoj = pokoj;
-  if (kierunek == "prawo") {
-    if (pokoj == 2) {
-      nastepnyPokoj += 3;
-    } else if (pokoj == 6 || pokoj == 3 || pokoj == 4) {
-      console.log("Napotkałeś na ścianę.");
-      energia++;
-    } else {
-      nastepnyPokoj++;
-    }
-  } else if (kierunek == "lewo") {
-    if (pokoj == 4) {
-      nastepnyPokoj -= 3;
-    } else if (pokoj == 1 || pokoj == 3 || pokoj == 4) {
-      console.log("Napotkałeś na ścianę.");
-      energia++;
-    } else {
-      nastepnyPokoj--;
-    }
-  } else if (kierunek == "gora") {
-    if (pokoj == 2 || pokoj == 6) {
-      nastepnyPokoj++;
-    } else if (pokoj == 4) {
-      nastepnyPokoj -= 2;
-    } else {
-      console.log("Napotkałeś na ścianę");
-      energia++;
-    }
-  } else if (kierunek == "dol") {
-    if (pokoj == 2) {
-      nastepnyPokoj += 2;
-    } else if (pokoj == 3) {
-      nastepnyPokoj--;
-    } else {
-      console.log("Napotkałeś na ścianę");
-      energia++;
-    }
-  } else {
-    console.log("Nieznana komenda, spróbuj jeszcze raz");
+  if (gracz.koniecgry) {
+    console.log("Gra skończona. Użyj start().");
+    return;
   }
 
-  if (nastepnyPokoj != pokoj) {
+  let nastepnyPokoj = gracz.pokoj;
+
+  if (!["prawo", "lewo", "gora", "dol"].includes(kierunek)) {
+    console.log("Nieznany kierunek.");
+    return;
+  }
+
+  if (kierunek === "prawo") {
+    if (gracz.pokoj === 2) {
+      nastepnyPokoj += 3;
+    } else if (![3, 4, 6].includes(gracz.pokoj)) {
+      nastepnyPokoj++;
+    }
+  } else if (kierunek === "lewo") {
+    if (gracz.pokoj === 4) {
+      nastepnyPokoj -= 3;
+    } else if (![1, 3, 4].includes(gracz.pokoj)) {
+      nastepnyPokoj--;
+    }
+  } else if (kierunek === "gora") {
+    if (gracz.pokoj === 2 || gracz.pokoj === 6) {
+      nastepnyPokoj++;
+    } else if (gracz.pokoj === 4) {
+      nastepnyPokoj -= 2;
+    }
+  } else if (kierunek === "dol") {
+    if (gracz.pokoj === 2) {
+      nastepnyPokoj += 2;
+    } else if (gracz.pokoj === 3) {
+      nastepnyPokoj--;
+    }
+  }
+
+  if (
+    nastepnyPokoj === gracz.pokoj ||
+    !pokoje.some((p) => p.id === nastepnyPokoj)
+  ) {
+    console.log("Napotkałeś ścianę.");
+    return;
+  }
+
+  gracz.pokoj = nastepnyPokoj;
+  gracz.energia--;
+
+  poziomenergii();
+
+  if (!gracz.koniecgry) {
     rozejrzyj();
   }
-  pokoj = nastepnyPokoj;
-  energia--;
-  poziomenergii();
 }
 
 // RUCH - END
