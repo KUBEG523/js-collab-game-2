@@ -140,7 +140,7 @@ function status() {
 
   console.log("Status gry:");
   console.log("Aktualny pokój: " + gracz.pokoj + " " + nazwa);
-  console.log("Aktualna energia: " + gracz.energia);
+  console.log("Aktualna energia: " + gracz.energia + " : " + (gracz.energia/20)*100 + " %");
 
   console.log("Czy posiadasz kartę: " + (gracz.posiadakarte ? "tak" : "nie"));
   console.log("Czy posiadasz bezpiecznik: " + (gracz.posiadabezpiecznik ? "tak" : "nie"));
