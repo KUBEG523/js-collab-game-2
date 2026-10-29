@@ -66,7 +66,7 @@ const pokoje = [
 ];
 
 //OBIKETY - END
-console.log("skibid");
+
 //CORE
 
 // Funkcja start rozpoczyne gre, ustawia wartosci domyslne gry i ustawia
@@ -90,9 +90,7 @@ function start() {
     }
   }
 
-  console.log(
-    "Ucieczka z Serwerowni v2. Początkowa energia: " + gracz.energia + ".",
-  );
+  console.log("Ucieczka z Serwerowni v2. Początkowa energia: " + gracz.energia + "." );
   pomoc();
 }
 
@@ -107,8 +105,7 @@ function poziomenergii() {
     gracz.wygrana = false;
     gracz.koniecgry = true;
     console.log(
-      "Przegrana, Skończyła ci się energia i to już koniec, zacznij gre od nowa komędą start() ",
-    );
+      "Przegrana, Skończyła ci się energia i to już koniec, zacznij gre od nowa komędą start() ");
   }
 }
 
@@ -120,8 +117,7 @@ function poziomenergii() {
 function Otworzdrzwi() {
   if (gracz.koniecgry) {
     console.log(
-      "Gra skończona, nie możesz wchodzić w interakcje z grą, zacznij nową.",
-    );
+      "Gra skończona, nie możesz wchodzić w interakcje z grą, zacznij nową");
     return;
   }
 
@@ -131,9 +127,7 @@ function Otworzdrzwi() {
       gracz.koniecgry = true;
       gracz.wygrana = true;
     } else {
-      console.log(
-        "Czegoś ci brakuje do otworzenia tych drzwii, jesteś pewien ze wszystko masz?",
-      );
+      console.log("Czegoś ci brakuje do otworzenia tych drzwii, jesteś pewien ze wszystko masz?");
       return;
     }
   } else {
@@ -146,9 +140,7 @@ function Otworzdrzwi() {
 
 function zbierz() {
   if (gracz.koniecgry) {
-    console.log(
-      "Gra skończona, nie możesz wchodzić w interakcje z grą, zacznij nową",
-    );
+    console.log("Gra skończona, nie możesz wchodzić w interakcje z grą, zacznij nową");
     return;
   }
 
@@ -211,8 +203,7 @@ function zbierz() {
 function przywrocZasilanie() {
   if (gracz.koniecgry) {
     console.log(
-      "Gra skończona, nie możesz wchodzić w interakcje z grą, zacznij nową",
-    );
+      "Gra skończona, nie możesz wchodzić w interakcje z grą, zacznij nową");
     return;
   }
 
@@ -239,8 +230,7 @@ function przywrocZasilanie() {
   }
 
   console.log(
-    "Zasilanie przywrócone. Wszystkie pokoje są oświetlone i drzwi mają energie.",
-  );
+    "Zasilanie przywrócone. Wszystkie pokoje są oświetlone i drzwi mają energie");
 }
 
 // INTERAKCJE - END
@@ -250,9 +240,7 @@ function przywrocZasilanie() {
 // wyswietla mape gry z znacznikiem lokalizacji
 function mapa() {
   if (gracz.koniecgry) {
-    console.log(
-      "Gra skończona, nie możesz wchodzić w interakcje z grą, zacznij nową.",
-    );
+    console.log("Gra skończona, nie możesz wchodzić w interakcje z grą, zacznij nową");
     return;
   }
 
@@ -277,9 +265,7 @@ function status() {
   console.log("Aktualna energia: " + gracz.energia);
 
   console.log("Czy posiadasz kartę: " + (gracz.posiadakarte ? "tak" : "nie"));
-  console.log(
-    "Czy posiadasz bezpiecznik: " + (gracz.posiadabezpiecznik ? "tak" : "nie"),
-  );
+  console.log("Czy posiadasz bezpiecznik: " + (gracz.posiadabezpiecznik ? "tak" : "nie"));
   console.log("Czy zasilanie działa: " + (gracz.stanzasilania ? "tak" : "nie"));
 
   if (gracz.koniecgry) {
@@ -312,24 +298,14 @@ function rozejrzyj(nowyPokoj = gracz.pokoj) {
 }
 
 function pomoc() {
-  console.log("start() - rozpoczyna grę od nowa i resetuje wszystkie postępy.");
-  console.log(
-    'idz("kierunek") - przenosi cię do sąsiedniego pokoju. Kierunki: "lewo", "prawo", "gora", "dol". Każdy ruch kosztuje energię.',
-  );
-  console.log(
-    "zbierz() - podnosi przedmiot (kartę, bezpiecznik lub baterię) leżący w pokoju.",
-  );
-  console.log(
-    "przywrocZasilanie() - wkłada bezpiecznik i włącza prąd. Działa tylko w serwerowni.",
-  );
-  console.log(
-    "Otworzdrzwi() - otwiera drzwi wyjściowe. Potrzebujesz karty i działającego zasilania, musisz stać w pokoju Wyjście; Wszystkie warunki musza zostac spełnione (karta + zasilanie).",
-  );
+  console.log("start() - rozpoczyna grę od nowa i resetuje wszystkie postępy :3");
+  console.log('idz("kierunek") - przenosi cię do sąsiedniego pokoju. Kierunki: "lewo", "prawo", "gora", "dol". Każdy ruch kosztuje energię.' );
+  console.log("zbierz() - podnosi przedmiot (kartę, bezpiecznik lub baterię) leżący w pokoju.");
+  console.log("przywrocZasilanie() - wkłada bezpiecznik i włącza prąd. Działa tylko w serwerowni.");
+  console.log("Otworzdrzwi() - otwiera drzwi wyjściowe. Potrzebujesz karty i działającego zasilania, musisz stać w pokoju Wyjście; Wszystkie warunki musza zostac spełnione (karta + zasilanie).");
   console.log("rozejrzyj() - opisuje aktualny pokój i widoczne przedmioty.");
   console.log("mapa() - pokazuje listę pokoi i miejsce, w którym jesteś.");
-  console.log(
-    "status() - pokazuje energię, posiadane przedmioty, stan zasilania i stan gry.",
-  );
+  console.log("status() - pokazuje energię, posiadane przedmioty, stan zasilania i stan gry.");
   console.log("UWAGA: gdy energia spadnie do 0, przegrywasz.");
 }
 
@@ -341,14 +317,14 @@ function pomoc() {
 
 function idz(kierunek) {
   if (gracz.koniecgry) {
-    console.log("Gra skończona. Użyj start().");
+    console.log("Gra skończona, nie możesz wchodzić w interakcje z grą, zacznij nową");
     return;
   }
 
   let nastepnyPokoj = gracz.pokoj;
 
   if (!["prawo", "lewo", "gora", "dol"].includes(kierunek)) {
-    console.log("Nieznany kierunek.");
+    console.log("Nieznany kierunek");
     return;
   }
 
@@ -396,6 +372,8 @@ function idz(kierunek) {
   }
 }
 
+
+// :3 
 // RUCH - END
 
 start();
