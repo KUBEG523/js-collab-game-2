@@ -1,22 +1,31 @@
-# Próby odbioru
+NR. NAZWA TESTU                         OCZEKIWANY WYNIK              WYNIK OTRZYMANY
+1   Mapa ma siedem pokoji,              PRAWDA                        Ma siedem pokoji, w tym jeden zaznaczony.
+    tylko jeden zaznaczony. 
+    Informacje są bezpłatne.
 
-| Wymaganie | Stan początkowy | Działanie | Wynik oczekiwany | Wynik faktyczny | Kto sprawdził |
-|---|---|---|---|---|---|
-| | | | | | |
+2   Lewo z pokoju 1 i nieznany          PRAWDA                        Nie zmienia danych.
+    kierunek nie zmieniają danych.
 
-Uwzględnij zwykłą ścieżkę, granicę, błędne wejście i zachowanie po błędzie. Jeden test regresji dotyczy wcześniejszej funkcji, której nowa zmiana miała nie naruszyć.
+3   Prawo przesuwa o jeden pokój i      PRAWDA                        Zmienia dane.
+    zużywa jedną energię.
 
-## Odtworzenie
+4   Tego samego przedmiotu nie da się   PRAWDA                        Nie da się zabrać, ponieważ tego przedmiotu nie ma (PRAWDA).
+    zabrać dwa razy
 
-Wersja Node:
-Wersje pakietów / lockfile:
-Komendy:
-System i przeglądarka:
+5   Nie da się naprawić zasilania bez   PRAWDA                        Nie da się naprawić i wyjść bez tych rzeczy.
+    bezpiecznika ani otworzyć drzwi bez
+    obu wymagań.
 
-## Błąd do poprawy
+6   Da się wygrać, wykonując potrzebne  PRAWDA                        Da się wygrać wykonując potrzebne czynności,
+    czynności w rozsądnej kolejności.
 
-Najkrótsze kroki odtworzenia:
-Oczekiwane:
-Otrzymane:
-Hipoteza:
-Wynik ponownej próby po poprawce:
+7   Po wszystkich poprawnych ruchach    PRAWDA                        Następuje porażka po wyczerpaniu energii, próba ruchu zakończona komunikatem o zakończonej grze.
+    bez wygranej następuje porażka.
+    Kolejny ruch nie zmienia już stanu.
+
+8   start() przywraca energię, pozycję  PRAWDA                        Przywraca energię, pozycję i flagę.
+    oraz wszystkie flagi
+
+9   Wszystkie komendy działają          PRAWDA                        Komendy działają w odpowiednich miejscach. 
+    poprawnie i nie da się ich wykonać 
+    w miejscu nie przeznaczonym dla nich.
