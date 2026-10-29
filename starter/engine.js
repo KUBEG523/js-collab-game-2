@@ -91,6 +91,7 @@ function start() {
   }
 
   console.log("Ucieczka z Serwerowni v2. Początkowa energia: " + gracz.energia + "." );
+  console.log("Uzyj mapa() zeby dowiedziec sie gdzie jestes")
   pomoc();
 }
 
@@ -116,6 +117,10 @@ function mapa() {
     console.log("Gra skończona, nie możesz wchodzić w interakcje z grą, zacznij nową");
     return;
   }
+
+  console.log("[   ] [Sek] [   ] [Wyj]");
+  console.log("[Wej] [Och] [Mag] [kor]");
+  console.log("[   ] [Ser] [   ] [   ]");
 
   console.log("Mapa pokojów:");
   const znacznik = " <- jestes tutaj";
