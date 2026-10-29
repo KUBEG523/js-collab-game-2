@@ -335,7 +335,7 @@ function idz(kierunek) {
       nastepnyPokoj++;
     }
   } else if (kierunek === "lewo") {
-    if (gracz.pokoj === 4) {
+    if (gracz.pokoj === 5) {
       nastepnyPokoj -= 3;
     } else if (![1, 3, 4].includes(gracz.pokoj)) {
       nastepnyPokoj--;
