@@ -198,6 +198,10 @@ function zbierz() {
   if (!zebrano) {
     console.log("W tym pokoju nie ma");
   }
+  else
+  {
+    gracz.energia--;
+  }
 }
 // reset zasilania w budynku
 function przywrocZasilanie() {
